@@ -23,3 +23,9 @@ def irr(series):
     c = np.real(roots[(roots >= 0)  & (np.iscomplex(roots) == False)])[0]
     # solve for C=1/(1+r)
     return (1/c) - 1
+
+def bond(n,c, p = 0, f = 0):
+    series = pd.Series(c, index = list(range(n)))
+    series[0] = -p
+    series.iloc[-1] += f
+    return series

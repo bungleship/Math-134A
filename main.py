@@ -6,9 +6,8 @@ if __name__ == '__main__':
     print("welcome")
 
 df = pd.DataFrame()
-def push(series, header = len(df.columns), DataFrame = df):
-    df[header] = pd.Series(series)
+def push(series, header = len(df.columns), DF = df):
+    if len(DF) == 0:
+        df.index = list(range(len(series)))
+    DF[header] = pd.Series(series, index = list(range(len(DF))))
 
-# push([100, 110, 120, 130, 140])
-# push([120, 115, 110, 105, 100])
-# npv()
