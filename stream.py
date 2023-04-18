@@ -2,30 +2,21 @@ import numpy as np
 import pandas as pd
 
 if __name__ == '__main__':
-    print('irr(series) # decreasing degree')
-    print("npv(series, r > 0)")
+    print('strm.compound(n,r)')
+    print('strm.discount(n,r)')
+    print('strm.bond(n,c,p,f)')
 
-def compound(r, length):
-    return (1 + r) ** pd.Series(list(range(length)))
-def discount(r, length):
-    return 1 / compound(r, length)
+def compound(n,r = 0):
+    return (1 + r) ** pd.Series(list(range(n)))
+def discount(n, r = 0):
+    return 1 / compound(n,r)
 
-def npv(series, r = 0):
-    discount_factor = discount(r, len(series))
-    return (series * discount_factor).sum()
-
-def irr(series):
-    if (series[0] < 0):
-        series = np.flip(series)
-    # get the roots of the polynomial
-    roots = np.roots(series)
-    # get the real positive root
-    c = np.real(roots[(roots >= 0)  & (np.iscomplex(roots) == False)])[0]
-    # solve for C=1/(1+r)
-    return (1/c) - 1
+def pv(series,r=0):
+    return series * discount(len(series), r)
 
 def bond(n,c, p = 0, f = 0):
     series = pd.Series(c, index = list(range(n)))
     series[0] = -p
     series.iloc[-1] += f
     return series
+
