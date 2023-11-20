@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm, leftindex}
+
+\newtheorem*{defn}{}
+
+\begin{document}
+
+
+\title{Actuarial Notation}
+\author{bungleship}
+\date{November 19, 2023}
+\maketitle
+\section{Introduction and motivation}
+booyah
+\section{The basic deterministic model}
+Let $T = \{0,\cdots,N\}$, the integers from 0 to N, be the times when a cash flow can occur.
+\begin{defn}
+  A cash flow vector $\vec{c} \in \mathbb{F}^{N+1}$ has a net cash flow of $c_k \in \mathbb{F}$ for each $k \in T$.
+$$
+\vec{c} = \begin{bmatrix}
+    c_0 \\
+    c_1 \\
+    \vdots \\
+    c_N
+  \end{bmatrix}
+$$
+\end{defn}
+\begin{defn}
+  Let $s,t,u \in T$. The discount function $v\colon T \times T \to \mathbb{R}^+$ satisfies
+$$
+v(s,t)v(t,u) = v(s,u)
+$$
+We define $v(t) :=v(0,t)$.
+\end{defn}
+\begin{defn}
+  Let $k \in T \backslash \{N\}$.The rate of interest $i_k$ and rate of discount $d_k$ for $(k,k+1)$ are defined to be
+$$
+\begin{matrix}
+i_k = v(k+1, k) - 1\\
+d_k = 1 - v(k,k+1)
+\end{matrix}
+$$
+We will assume these rates will always be nonnegative.
+\end{defn}
+\begin{defn}
+  The value at time $n \in T$ of $\vec{c}$ with respect to $v$ is 
+$$
+Val_n (\vec{c};v) = \sum_{k=0}^{N} {c_k v(n,k)}
+$$
+\end{defn}
+Fixing $n$, $Val_n\colon \mathbb{F}^{N+1} \to \mathbb{F}$ is a linear transformation and is represented by the $1 \times (N+1)$ matrix
+$$
+\begin{bmatrix}
+v(n,0) & v(n,1) & \cdots & v(n,N)
+\end{bmatrix}
+$$
+The present value of a cash flow stream is $\ddot{a}(\vec{c};v) := Val_0 (\vec{c};v)$. Cash flow vectors $\vec{c}$ and $\vec{e}$ are actuarially equivalent with respect to $v$ if there is an $n \in T$ such that $Val_n(\vec{c};v) = Val_n(\vec{e},v)$.
+\subsection{Vector notation}
+For cash flow vectors $\vec{c},\vec{d}$, let $(\vec{c},\vec{d})$ be the juxtaposition of the two vectors. We use * to denote the Hadamard product of $\vec{c}$ and $\vec{d}$. For $r \in \mathbb{F}$ and $k \in \mathbb{Z}$, let $r_k$ be the vector of $k$ entries of r. For $i \in T$, let $\bold{e}^i$ be the zero vector plus one at position $i$. Let $\bold{j}^n = (1,2,\cdots,n-1,n)$.
+\begin{defn}
+Given $\vec{b}$, we define $\Delta \vec{b}$ to be
+$$
+\Delta{\vec{b}} =
+\begin{bmatrix}
+b_0 \\
+b_1 - b_0 \\
+b_2 - b_1 \\
+\vdots \\
+b_n - b_{n-1} \\
+-b_n
+\end{bmatrix}
+$$
+\end{defn}
+\begin{defn}
+Given $\vec{b}$ and a discount function $v$, we define $\nabla \vec{b}$ at position $k$ to be
+$$
+\nabla b_k = b_k - v(k, k+1)b_{k+1}
+$$
+\end{defn}
+\subsection{Balances and reserves}
+Let $k \in T$. For a cash flow vector $\vec{c}$ we let
+$$
+\leftindex_k{\vec{c}} =
+\begin{bmatrix}
+c_0 \\
+c_1 \\
+\vdots \\
+c_{k-1} \\
+0 \\
+\vdots \\
+0
+\end{bmatrix},
+\leftindex^k{\vec{c}} =
+\begin{bmatrix}
+0 \\
+\vdots \\
+0 \\
+c_k \\
+c_{k+1} \\
+\vdots \\
+c_N
+\end{bmatrix}
+$$
+\begin{defn}
+The balance at time $k \in T$ with respect to $\vec{c},v$ is
+$$
+B_k(\vec{c};v) = Val_k(\leftindex_k{\vec{c}};v)=\sum_{j=0}^{k-1} {c_j v(k,j)}
+$$
+\end{defn}
+\begin{defn}
+The reserve at time $k \in T$ with respect to $\vec{c},v$ is
+$$
+\leftindex_k{V}(\vec{c};v) = -Val_k(\leftindex^k{\vec{c}};v)=-\sum_{j=k}^{N} {c_j v(k,j)}
+$$
+\end{defn}
+\subsection{Time shifting and the splitting identity}
+\subsection{Internal rates of return}
+\section{The life table}
+\section{Life annuities}
+\section{Life insurance}
+\section{Insurance and annuity reserves}
+\section{Fractional durations}
+\section{Continuous payments}
+\section{Select mortality}
+\section{Multiple-life contracts}
+\section{Multiple-decrement theory}
+\section{Expenses and profits}
+\section{Specialized topics}
+\section{Survival distributions and failure times}
+\section{The stochastic approach to insurance and annuities}
+\section{Simplifications under level benefit contracts}
+\section{The minimum failure time}
+\section{An introduction to stochastic processes}
+\section{Multi-state models}
+\section{Introduction to the Mathematics of Financial Markets}
+\section{Compound distributions}
+\section{Risk assessment}
+\section{Ruin models}
+\section{Credibility theory}
+\end{document}
