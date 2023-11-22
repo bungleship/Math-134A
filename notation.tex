@@ -113,9 +113,67 @@ $$
 \leftindex_k{V}(\vec{c};v) = -Val_k(\leftindex^k{\vec{c}};v)=-\sum_{j=k}^{N} {c_j v(k,j)}
 $$
 \end{defn}
+\begin{defn}
+We denote the accumulated amount at time $k \in T$ after the cash flow at time $k$ is paid as
+$$
+\tilde{B}_k(\vec{c})=B_k(\vec{c})+c_k
+$$
+\end{defn}
 \subsection{Time shifting and the splitting identity}
+\begin{defn}
+Given a cash flow vector $\vec{c}$ and time $k \in T$, we define a new vector
+$$
+\vec{c} \circ k = 
+\begin{bmatrix}
+c_k \\
+c_{k+1} \\
+\vdots \\
+c_N
+\end{bmatrix}
+$$
+\end{defn}
+\begin{defn}
+Given a discount function $v$ and a time $k \in T$, we define a new discount function
+$$
+(v \circ k)(n,m) = v(n+k,m+k)
+$$
+\end{defn}
 \subsection{Internal rates of return}
+\begin{defn}
+Given a net cash flow vector of a transaction (from lender's perspective) $\vec{c}$, the internal rate of return of the transaction is $i \in (-1,\infty)$ such that for discount function $v(n)=(1+i)^{-n}$,
+\begin{enumerate}
+\item $\tilde{B}_N (\vec{c} \colon v) = 0$, and
+\item $\forall k \in T \backslash \{N\} \{\tilde{B}_k (\vec{c} \colon v) \leq 0 \}$
+\end{enumerate}
+\end{defn}
 \section{The life table}
+Let $x \in \mathbb{N}_0$ denote an age. Let $l_0 \in \mathbb{N}$ be a population of newborns. Then $l_x$ is the number of subjects counted in $l_0$ who are still alive at age $x$, and $d_x$ is the number of subjects counted in $l_0$ who died between ages $x$ and $x+1$. Hence the
+relationship
+$$
+l_{x+1} = l_x - d_x
+$$
+The limiting age $\omega$ is the smallest $x$ such that $l_x = 0$. Given $x,n \in \mathbb{N}_0$, the probability that a subject aged $x$ will survive to age $x+n$ is given as
+$$
+\leftindex_n p_x = \frac{l_{x+n}}{l_x}
+$$
+and the probability that a subject aged $x$ will die before reaching age $x+n$ is given as
+$$
+\leftindex_n q_x = \frac {l_x - l_{x+n}} {l_x} = 1 - \leftindex_n p_x
+$$
+We take $n$ to be 1 when it is omitted. $q_x$ is called the mortality rate at age $x$.
+\begin{defn}
+The curtate life expectancy at age $x$ is given as
+$$
+e_x = \frac{1}{l_x}\sum_{k=1}^{\omega-x-1} {l_{x+k}} = \sum_{k=1}^{\omega-x-1} {\leftindex_k p_x} = p_x(1+e_{x+1})
+$$
+\end{defn}
+This is an approximation for the complete life expectancy $\mathring{e}_x \approx e_x + \frac{1}{2}$.
+\begin{defn}
+The curtate n-year temporary life expectancy at age $x$ is given as
+$$
+\sum_{k=1}^{n} {\leftindex_k p_x}
+$$
+\end{defn}
 \section{Life annuities}
 \section{Life insurance}
 \section{Insurance and annuity reserves}
